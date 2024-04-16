@@ -12,7 +12,6 @@ import java.util.List;
 
 @RestController
 @AllArgsConstructor
-@CrossOrigin("*")
 @RequestMapping("/semesters")
 public class SemesterController {
 

@@ -38,11 +38,11 @@ public class EniLibraryApplication {
 
 
 			Subject subject1 = new Subject();
-			subject1.setSubjectname("Semester 1");
+			subject1.setSubjectname("tla");
 			subject1.setResources(Collections.singletonList(doc1));
 
 			Subject subject2 = new Subject();
-			subject2.setSubjectname("Semester 2");
+			subject2.setSubjectname("SGBD");
 			subject2.setResources(Collections.singletonList(doc2));
 
 
