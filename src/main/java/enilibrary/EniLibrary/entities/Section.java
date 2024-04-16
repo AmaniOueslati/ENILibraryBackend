@@ -1,7 +1,9 @@
 package enilibrary.EniLibrary.entities;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jakarta.persistence.*;
+
+import javax.persistence.*;
+
 import lombok.*;
 
 import java.util.ArrayList;
