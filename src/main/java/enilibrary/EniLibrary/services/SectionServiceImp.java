@@ -5,7 +5,9 @@ import enilibrary.EniLibrary.entities.Semester;
 import enilibrary.EniLibrary.exception.SectionNotFoundException;
 import enilibrary.EniLibrary.repositories.SectionRepository;
 import enilibrary.EniLibrary.repositories.SemesterRepository;
-import jakarta.transaction.Transactional;
+import javax.persistence.*;
+import javax.transaction.Transactional;
+
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;

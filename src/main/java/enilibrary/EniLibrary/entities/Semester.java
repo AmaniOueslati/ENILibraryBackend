@@ -1,9 +1,8 @@
 package enilibrary.EniLibrary.entities;
 
 import enilibrary.EniLibrary.Enum.SemesterType;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.*;
+import javax.persistence.*;
+
 import lombok.*;
 
 import java.util.List;
