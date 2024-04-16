@@ -6,14 +6,15 @@ import java.util.HashSet;
 import java.util.Set;
 
 import enilibrary.EniLibrary.Enum.Rolename;
-import jakarta.persistence.*;
+
+import javax.persistence.*;
 
 @Entity
 public class Role implements Serializable {
 
 
     @Id
-    @GeneratedValue (strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idrole;
 
     @Enumerated(EnumType.STRING)
@@ -71,7 +72,12 @@ public class Role implements Serializable {
         return "Role [idrole=" + idrole + ", rolename=" + rolename + ", listusers=" + listusers + "]";
     }
 
-
+    public Rolename getName() {
+        return rolename;
+    }
+    public void setName(Rolename rolename) {
+        this.rolename = rolename;
+    }
 
 
 }

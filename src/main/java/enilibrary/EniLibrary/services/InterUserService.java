@@ -32,7 +32,6 @@ public interface InterUserService {
 
     public List<User> listuserfromidrole(Long idrole);
 
-    public User addUserFile(Long iduser, MultipartFile file) throws IOException;
 
 
 }

@@ -6,13 +6,11 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import jakarta.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+
+
+import javax.persistence.*;
 
 @Entity
 public class User implements Serializable {
@@ -33,6 +31,9 @@ public class User implements Serializable {
     private Set<Role> listroles = new HashSet<>();
 
 
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+    @JsonIgnore
+    private List<FeedBack> feedBacks;
 
 
 
@@ -40,8 +41,11 @@ public class User implements Serializable {
 
 
 
-
-
+    public User(String username, String email, String password) {
+        this.username = username;
+        this.email = email;
+        this.password = password;
+    }
 
 
     public User(Long iduser, String fname, String lname, String password, String confirmPassword, String email,
@@ -158,5 +162,11 @@ public class User implements Serializable {
     public void addRole(Role role)
     {
         this.listroles.add(role);
+    }
+    public Set<Role> getRoles() {
+        return listroles;
+    }
+    public void setRoles(Set<Role> roles) {
+        this.listroles = roles;
     }}
 

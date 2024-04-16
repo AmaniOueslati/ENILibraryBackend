@@ -1,6 +1,5 @@
 package enilibrary.EniLibrary.services;
 
-import enilibrary.EniLibrary.entities.Filee;
 import enilibrary.EniLibrary.entities.Role;
 import enilibrary.EniLibrary.entities.User;
 import enilibrary.EniLibrary.repositories.IRoleRepository;
@@ -13,11 +12,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
-
+import java.util.Optional;
 
 
 @Service
@@ -29,8 +24,6 @@ public class UserServiceImpl implements InterUserService {
     @Autowired
     IRoleRepository roleRep;
 
-    @Autowired
-    FileServiceImpl fileserv;
 
     @Override
     public User addUser(User user) {
@@ -49,7 +42,7 @@ public class UserServiceImpl implements InterUserService {
     public User updateUser(User user, Long iduser) {
         // TODO Auto-generated method stub
 
-        User usr= userRep.findById(iduser).get();
+        User usr = userRep.findById(iduser).get();
 
         usr.setFname(user.getFname());
         usr.setLname(user.getLname());
@@ -61,10 +54,10 @@ public class UserServiceImpl implements InterUserService {
     public String deleteuser(Long iduser) {
         // TODO Auto-generated method stub
 
-        String ch="";
+        String ch = "";
 
         userRep.deleteById(iduser);
-        ch="user successfuly deleted !!";
+        ch = "user successfuly deleted !!";
         return ch;
     }
 
@@ -82,20 +75,34 @@ public class UserServiceImpl implements InterUserService {
 
     @Override
     public User findByUsername(String username) {
-        // TODO Auto-generated method stub
-        return userRep.findByUsername(username);
+
+
+// Utilisation de findByUsername qui renvoie un Optional<User>
+        Optional<User> userOptional = userRep.findByUsername(username);
+        if (userOptional.isPresent()) {
+            User user = userOptional.get();
+
+            return userOptional.get();
+
+            // Faire quelque chose avec l'utilisateur trouvé
+        } else {
+            return null;
+        }
+
+
     }
 
     @Override
     public User adduserRole(Long iduser, Long idrole) {
         // TODO Auto-generated method stub
 
-        User user =userRep.findById(iduser).get();
+        User user = userRep.findById(iduser).get();
         Role role = roleRep.findById(idrole).get();
 
         user.addRole(role);
         return userRep.save(user);
     }
+
     @Override
     public List<Long> listiduserfromidrole() {
         // TODO Auto-generated method stub
@@ -113,20 +120,5 @@ public class UserServiceImpl implements InterUserService {
         // TODO Auto-generated method stub
         return userRep.listuserfromidrole(idrole);
     }
-
-    @Override
-    public User addUserFile(Long iduser, MultipartFile file) throws IOException {
-        // TODO Auto-generated method stub
-
-        User user = userRep.findById(iduser).get();
-
-        Filee f = fileserv.addfile(file);
-        f.setUser(user);
-
-        //user.setFile(f);
-
-        return userRep.save(user);
-    }
-
 
 }

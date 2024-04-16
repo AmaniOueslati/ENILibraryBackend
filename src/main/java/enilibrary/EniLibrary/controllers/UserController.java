@@ -6,6 +6,7 @@ import java.util.List;
 import enilibrary.EniLibrary.entities.User;
 import enilibrary.EniLibrary.services.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -34,7 +35,7 @@ public class UserController {
     {
         return "Bonjour !!!"+name;
     }
-
+@Secured("ROLE_ADMIN")
     @PostMapping(value = "/adduser")
     public User addUser(@RequestBody User user)
     {
@@ -101,9 +102,5 @@ public class UserController {
         return userServ.listuserfromidrole(idrole);
     }
 
-    @PostMapping(value = "/adduserfile/{iduser}")
-    public User adduserfile(@PathVariable Long iduser,@RequestParam("file") MultipartFile file) throws IOException
-    {
-        return userServ.addUserFile(iduser, file);
-    }
+
 }

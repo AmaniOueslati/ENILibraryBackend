@@ -1,10 +1,13 @@
 package enilibrary.EniLibrary.repositories;
 
-import enilibrary.EniLibrary.entities.Filee;
+import enilibrary.EniLibrary.entities.FeedBack;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
+
 @Repository
-public interface IFileRepository extends JpaRepository<Filee, Long> {
+public interface FeedBackRepository extends JpaRepository<FeedBack, Integer> {
 
 }

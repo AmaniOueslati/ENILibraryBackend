@@ -1,19 +1,22 @@
 package enilibrary.EniLibrary.repositories;
 
+import ch.qos.logback.core.joran.action.Action;
 import enilibrary.EniLibrary.entities.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface IUserRepository extends JpaRepository<User, Long> {
 
     Boolean existsByUsername(String username);
 
-    public User findByUsername(String userName);
+    Optional<User> findByUsername(String username);
 
 
     @Query(value = "select * from user u where u.username like :cle%" , nativeQuery = true)
@@ -27,4 +30,7 @@ public interface IUserRepository extends JpaRepository<User, Long> {
 
     @Query(value = "select * from user u, userrole ur where u.iduser=ur.iduser and ur.idrole=?1", nativeQuery = true)
     public List<User> listuserfromidrole(Long idrole);
+
+    boolean existsByEmail(String email);
+
 }
