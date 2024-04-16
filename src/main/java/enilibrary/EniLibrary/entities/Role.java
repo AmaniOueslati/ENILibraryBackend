@@ -9,6 +9,8 @@ import enilibrary.EniLibrary.Enum.Rolename;
 
 import javax.persistence.*;
 
+
+
 @Entity
 public class Role implements Serializable {
 

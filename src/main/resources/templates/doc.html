@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>File Upload / Download</title>
+</head>
+<body>
+<div>
+    <h3>Upload Multiple Files</h3>
+    <form id="uploadFiles" name="uploadFiles" method="post" th:action="@{/uploadFiles}" enctype="multipart/form-data">
+        <input type="file" name="files" multiple required />
+        <select name="documentCategory">
+            <option value="TD">TD</option>
+            <option value="COURS">COURS</option>
+            <option value="EXAM">EXAM</option>
+        </select>
+        <button type="submit">Submit</button>
+    </form>
+</div>
+
+<div>
+    <h3>List of Documents</h3>
+    <table>
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Category</th>
+            <th>Download Link</th>
+            <th>Update Category</th>
+            <th>Update Name</th>
+            <th>Delete Document</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="doc : ${docs}">
+            <td th:text="${doc.id}" />
+            <td th:text="${doc.docName}" />
+            <td th:text="${doc.documentCategory}" />
+            <td><a th:href="@{'/downloadFile/' + ${doc.id}}">Download</a></td>
+            <td>
+                <form method="post" th:action="@{/updateName/{id}(id=${doc.id})}">
+                    <input type="text" name="newName" placeholder="New Name">
+                    <button type="submit">Update Name</button>
+                </form>
+            </td>
+
+
+            <td>
+                <form method="post" th:action="@{/updateCategory/{id}(id=${doc.id})}">
+                    <label>
+                        <select  name="newCategory" >
+                            <option value="TD">TD</option>
+                            <option value="COURS">COURS</option>
+                            <option value="EXAM">EXAM</option>
+                        </select>
+                    </label>
+
+                    <button type="submit">Update Category</button>
+                </form>
+            </td>
+            <td>
+                <form method="post" th:action="@{/deleteDoc/{id}(id=${doc.id})}">
+                    <input type="hidden" name="_method" value="DELETE">
+                    <button type="submit">Delete Document</button>
+                </form></tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>
+
