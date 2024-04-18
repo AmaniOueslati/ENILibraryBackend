@@ -2,9 +2,10 @@ package enilibrary.EniLibrary.entities;
 
 import enilibrary.EniLibrary.Enum.SemesterType;
 
+import jakarta.persistence.*;
 import lombok.*;
 
-import javax.persistence.*;
+//import javax.persistence.*;
 import java.util.List;
 
 @Entity

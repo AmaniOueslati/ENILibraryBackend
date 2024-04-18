@@ -1,9 +1,10 @@
 package enilibrary.EniLibrary.entities;
 
+import jakarta.persistence.*;
 import lombok.*;
 
-import javax.persistence.*;
-import javax.persistence.GeneratedValue;
+//import javax.persistence.*;
+//import javax.persistence.GeneratedValue;
 import java.util.List;
 @Entity
 @AllArgsConstructor

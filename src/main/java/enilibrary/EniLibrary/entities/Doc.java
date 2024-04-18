@@ -1,7 +1,8 @@
 package enilibrary.EniLibrary.entities;
 
 import enilibrary.EniLibrary.Enum.DocumentCategory;
-import javax.persistence.*;
+import jakarta.persistence.*;
+//import javax.persistence.*;
 
 
 @Entity

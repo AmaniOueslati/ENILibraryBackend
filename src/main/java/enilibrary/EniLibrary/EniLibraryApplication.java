@@ -1,14 +1,12 @@
 package enilibrary.EniLibrary;
 
 import enilibrary.EniLibrary.Enum.DocumentCategory;
-import enilibrary.EniLibrary.entities.Doc;
-import enilibrary.EniLibrary.entities.Section;
-import enilibrary.EniLibrary.entities.Semester;
-import enilibrary.EniLibrary.entities.Subject;
+import enilibrary.EniLibrary.entities.*;
 import enilibrary.EniLibrary.repositories.DocRepository;
 import enilibrary.EniLibrary.repositories.SectionRepository;
 import enilibrary.EniLibrary.repositories.SemesterRepository;
 import enilibrary.EniLibrary.repositories.SubjectRepository;
+import enilibrary.EniLibrary.services.FeedBackService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -29,7 +27,7 @@ public class EniLibraryApplication {
 	}
 
 
-	@Bean
+	/*@Bean
 	public CommandLineRunner loadData(SectionRepository sectionRepository, DocRepository docRepository, SemesterRepository semesterRepository, SubjectRepository subjectRepository) {
 		return args -> {
 
@@ -70,5 +68,23 @@ public class EniLibraryApplication {
 		};
 	}
 
+*/
+	@Bean
+	public CommandLineRunner demo(FeedBackService feedBackService) {
+		return args -> {
+			// Add a new feedback
+			FeedBack newFeedback = new FeedBack();
+			newFeedback.setStudentName("John Doe");
+			newFeedback.setMessage("This is a feedback message.");
+			newFeedback.setRating(5);
+			feedBackService.addFeedback(newFeedback);
 
-}
+			// Retrieve and view all feedbacks
+			List<FeedBack> feedbackList = feedBackService.getAllFeedback();
+			feedbackList.forEach(feedback ->
+					System.out.println(feedback.toString())
+			);
+		};
+	}}
+
+
