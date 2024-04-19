@@ -2,10 +2,17 @@ package enilibrary.EniLibrary.controllers;
 
 import java.io.IOException;
 import java.util.List;
-
+import enilibrary.EniLibrary.entities.FeedBack;
+import enilibrary.EniLibrary.entities.Subject;
+import enilibrary.EniLibrary.exception.FeedbackNotFoundException;
+import enilibrary.EniLibrary.exception.UserNotFoundException;
+import enilibrary.EniLibrary.exception.SemesterNotFoundException;
+import enilibrary.EniLibrary.services.FeedBackService;
 import enilibrary.EniLibrary.entities.User;
+import enilibrary.EniLibrary.exception.SemesterNotFoundException;
 import enilibrary.EniLibrary.services.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -102,5 +109,29 @@ public class UserController {
         return userServ.listuserfromidrole(idrole);
     }
 
+  /*********************************** KHEDEMTY **************************/
 
+
+    // Autres méthodes du contrôleur...
+
+    @PostMapping("/{userId}/feedbacks/{feedbackId}")
+    public Void associateFeedbackToUser(@PathVariable Long userId, @PathVariable Long feedbackId) {
+        try {
+            userServ.associateFeedbackToUser(userId, feedbackId);
+            return null; // Retourne null si l'association a réussi
+        } catch (FeedbackNotFoundException | UserNotFoundException e) {
+            // Vous pouvez choisir de gérer l'exception ici
+            return null;
+        }
+    }
+
+    @GetMapping("/{userId}/feedbacks")
+    public List<FeedBack> getFeedbacksOfUser(@PathVariable Long userId) {
+        try {
+            return userServ.FeedbacksOfUser(userId); // Retourne les feedbacks de l'utilisateur si trouvés
+        } catch (FeedbackNotFoundException e) {
+            // Vous pouvez choisir de gérer l'exception ici
+            return null;
+        }
+    }
 }

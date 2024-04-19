@@ -1,9 +1,9 @@
 package enilibrary.EniLibrary.entities;
-
+//import jakarta.persistence.*;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
-
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
@@ -18,21 +18,18 @@ import java.util.Date;
 public class FeedBack implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
-    private String label;
-    private String description;
+    private Long idFeed;
+
+    @Column(nullable = false, length = 500)
+    private String message;
+
+    @Column(nullable = false)
     private int rating;
-    private int likes;
-    private int dislikes;
 
     @CreationTimestamp
     private Date createdAt;
 
     @UpdateTimestamp
     private Date modifiedAt;
-
-    @ManyToOne(fetch = FetchType.EAGER)
-    private User user;
-
 
 }

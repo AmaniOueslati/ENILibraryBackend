@@ -1,12 +1,15 @@
 package enilibrary.EniLibrary.services;
 
+import enilibrary.EniLibrary.entities.FeedBack;
 import enilibrary.EniLibrary.entities.Role;
 import enilibrary.EniLibrary.entities.User;
+import enilibrary.EniLibrary.repositories.FeedBackRepository;
 import enilibrary.EniLibrary.repositories.IRoleRepository;
 import enilibrary.EniLibrary.repositories.IUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
+import enilibrary.EniLibrary.exception.FeedbackNotFoundException;
 
 
 
@@ -23,8 +26,76 @@ public class UserServiceImpl implements InterUserService {
 
     @Autowired
     IRoleRepository roleRep;
+   /********************************** START KHEDEMTY *********************************************/
+   @Autowired
+   private FeedBackRepository feedBackRepository;
+
+    public User saveUser(User user) {
+        return userRep.save(user);
+    }
+
+    public void associateFeedbackToUser(Long idfeed, Long iduser) throws FeedbackNotFoundException { // Correction du nom de l'exception
+        Optional<User> userOptional = userRep.findById(iduser);
+        if (userOptional.isPresent()) {
+            User user = userOptional.get();
+            Optional<FeedBack> feedBackOptional = feedBackRepository.findById(idfeed);
+            if (feedBackOptional.isPresent()) {
+                FeedBack feedBack = feedBackOptional.get();
+                user.getFeedBacks().add(feedBack);
+                userRep.save(user);
+            } else {
+                throw new FeedbackNotFoundException("Feedback not found with id: " + idfeed); // Correction du message de l'exception
+            }
+        } else {
+            throw new FeedbackNotFoundException("User not found with id: " + iduser); // Correction du message de l'exception
+        }
+    }
+
+    public List<FeedBack> FeedbacksOfUser(Long id) {
+        Optional<User> userOptional = userRep.findById(id);
+        if (userOptional.isPresent()) {
+            User user = userOptional.get();
+            return user.getFeedBacks();
+        } else {
+            throw new FeedbackNotFoundException("User not found with id: " + id); // Correction du message de l'exception
+        }
+    }
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    /*************************************  END KHEDEMTY *********************************/
     @Override
     public User addUser(User user) {
         // TODO Auto-generated method stub

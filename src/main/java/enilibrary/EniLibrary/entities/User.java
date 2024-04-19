@@ -31,16 +31,12 @@ public class User implements Serializable {
     @JoinTable(name = "userrole", joinColumns = @JoinColumn(name="iduser"), inverseJoinColumns = @JoinColumn(name="idrole"))
     private Set<Role> listroles = new HashSet<>();
 
-
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
-    @JsonIgnore
-    private List<FeedBack> feedBacks;
-
-
-
-
-
-
+    @OneToMany( cascade = CascadeType.PERSIST)
+    @JoinTable(name = "iduser_feedback",
+            joinColumns = {@JoinColumn(name = "idFeed")},
+            inverseJoinColumns = {@JoinColumn(name = "iduser")},
+            uniqueConstraints = {@UniqueConstraint(columnNames = {"idFeed", "iduser"})})
+        private List<FeedBack> feedbacks ;
 
     public User(String username, String email, String password) {
         this.username = username;
@@ -169,5 +165,14 @@ public class User implements Serializable {
     }
     public void setRoles(Set<Role> roles) {
         this.listroles = roles;
-    }}
+    }
+
+
+    public List<FeedBack> getFeedBacks() {
+        return feedbacks;
+    }
+
+
+
+}
 

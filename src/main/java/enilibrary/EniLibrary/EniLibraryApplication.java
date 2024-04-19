@@ -25,10 +25,7 @@ public class EniLibraryApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(EniLibraryApplication.class, args);
 
-
 	}
-
-
 	@Bean
 	public CommandLineRunner loadData(SectionRepository sectionRepository, DocRepository docRepository, SemesterRepository semesterRepository, SubjectRepository subjectRepository) {
 		return args -> {
@@ -52,13 +49,14 @@ public class EniLibraryApplication {
 
 			Semester semester2 = new Semester();
 			semester2.setSemesterName("Semester 2");
-			semester2.setSubjects(Collections.singletonList(subject2));;
+			semester2.setSubjects(Collections.singletonList(subject2));
+			;
 
 
 			Section section1 = new Section();
 			section1.setSectionName("Informatique");
 			section1.setEnrollementcount(85L);
-			section1.setSemesters(Arrays.asList( semester2));
+			section1.setSemesters(Arrays.asList(semester2));
 
 			Section section2 = new Section();
 			section2.setSectionName("Mecatronique");
@@ -69,6 +67,5 @@ public class EniLibraryApplication {
 			sectionRepository.saveAll(Arrays.asList(section1, section2));
 		};
 	}
-
 
 }
