@@ -1,10 +1,14 @@
 package enilibrary.EniLibrary.entities;
 
 import enilibrary.EniLibrary.Enum.SemesterType;
+<<<<<<< HEAD
 import javax.persistence.*;
+=======
+>>>>>>> youssef
 
 import lombok.*;
 
+import javax.persistence.*;
 import java.util.List;
 
 @Entity

@@ -1,6 +1,13 @@
 package enilibrary.EniLibrary.entities;
+<<<<<<< HEAD
 import javax.persistence.*;
+=======
+
+>>>>>>> youssef
 import lombok.*;
+
+import javax.persistence.*;
+import javax.persistence.GeneratedValue;
 import java.util.List;
 @Entity
 @AllArgsConstructor

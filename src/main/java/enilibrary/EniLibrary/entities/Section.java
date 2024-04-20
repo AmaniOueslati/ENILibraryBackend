@@ -1,7 +1,13 @@
 package enilibrary.EniLibrary.entities;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+<<<<<<< HEAD
 import javax.persistence.*;
+=======
+
+import javax.persistence.*;
+
+>>>>>>> youssef
 import lombok.*;
 
 import java.util.ArrayList;

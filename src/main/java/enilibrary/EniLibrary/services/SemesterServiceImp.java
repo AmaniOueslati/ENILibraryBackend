@@ -8,7 +8,11 @@ import enilibrary.EniLibrary.exception.SemesterNotFoundException;
 import enilibrary.EniLibrary.repositories.SectionRepository;
 import enilibrary.EniLibrary.repositories.SemesterRepository;
 import enilibrary.EniLibrary.repositories.SubjectRepository;
+<<<<<<< HEAD
 import javax.persistence.*;
+=======
+
+>>>>>>> youssef
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
